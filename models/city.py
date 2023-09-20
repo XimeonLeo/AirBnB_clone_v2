@@ -13,8 +13,8 @@ class City(BaseModel, Base):
             state_is:
                 sqlachemy.String, id for the state where city is
     """
-    __tablename__ = "ciries"
+    __tablename__ = "cities"
     name = Column(String(128), nullable=False)
     state_id = Column(String(60),
-                      nullable=False,
-                      ForeignKey('state_id'))
+                      ForeignKey('states.id'),
+                      nullable=False)

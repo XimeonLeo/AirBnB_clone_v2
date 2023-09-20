@@ -21,7 +21,7 @@ class DBStorage:
     def __init__(self):
         _user = os.environ.get('HBNB_MYSQL_USER')
         _passwd = os.environ.get('HBNB_MYSQL_PWD')
-        _host = os.environ.get('HBNB_MYSQL_DB')
+        _host = os.environ.get('HBNB_MYSQL_HOST')
         _db = os.environ.get('HBNB_MYSQL_DB')
 
         self.__engine = create_engine(
@@ -38,14 +38,14 @@ class DBStorage:
         if cls:
             result = self.__session.query(eval(cls)).all()
         else:
-            result = self.__session.query(User).all()
-            result.extend(self.__session.query(State).all())
+            result = self.__session.query(State).all()
             result.extend(self.__session.query(City).all())
-            result.extend(self.__session.query(Amenity).all())
-            result.extend(self.__session.query(Place).all())
-            result.extend(self.__session.query(Review).all())
+            # result.extend(self.__session.query(User).all())
+            # result.extend(self.__session.query(Amenity).all())
+            # result.extend(self.__session.query(Place).all())
+            # result.extend(self.__session.query(Review).all())
 
-        return {f"{typeof(obj).__name__}.{obj.id}": obj for obj in result}
+        return {f"{type(obj).__name__}.{obj.id}": obj for obj in result}
 
     def new(self, obj):
         """ Add obj to the current database session """
