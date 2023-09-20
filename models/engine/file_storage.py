@@ -53,8 +53,7 @@ class FileStorage:
         """ Deletes an object from the __object if exists """
         if obj is None:
             pass
-        elif obj in self.__objects:
-            try:
-                del self.__objects[f"{type(obj).__name__}.{obj.id}"]
-            except Exception:
-                pass
+        try:
+            del self.__objects[f"{type(obj).__name__}.{obj.id}"]
+        except Exception:
+            pass
