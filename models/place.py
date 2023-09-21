@@ -2,6 +2,8 @@
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy.orm import relationship
+import os
 
 
 class Place(BaseModel, Base):
@@ -17,8 +19,7 @@ class Place(BaseModel, Base):
     name = Column(String(128),
                   nullable=False)
     description = Column(String(128),
-                         nullable=True,
-                         default="NULL")
+                         nullable=True)
     number_rooms = Column(Integer,
                           default=0,
                           nullable=False)
@@ -36,3 +37,24 @@ class Place(BaseModel, Base):
     longitude = Column(Float,
                        nullable=True)
     amenity_ids = []
+
+#    storage_type = os.environ.get("HBNB_TYPE_STORAGE")
+#
+#    if storage_type == "db":
+#        reviews = relationship("Review",
+#                               backref="place",
+#                               cascade="all, delete")
+#    else:
+#        @property
+#        def reviews(self):
+#            """
+#            Get a list of reviews associated with a place.
+#            Returns:
+#                A list of review associated with this state.
+#            """
+#            from models import storage, Review
+#            reviews = []
+#            for review in storage.all(Review).values():
+#                if review.places_id == self.id:
+#                    reviews.append(review)
+#            return review
