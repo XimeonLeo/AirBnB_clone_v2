@@ -16,7 +16,9 @@ class Place(BaseModel, Base):
                      nullable=False)
     name = Column(String(128),
                   nullable=False)
-    description = Column(String(128), nullable=False)
+    description = Column(String(128),
+                         nullable=True,
+                         default="NULL")
     number_rooms = Column(Integer,
                           default=0,
                           nullable=False)
@@ -30,7 +32,7 @@ class Place(BaseModel, Base):
                             default=0,
                             nullable=False)
     latitude = Column(Float,
-                      nullable=False)
+                      nullable=True)
     longitude = Column(Float,
-                       nullable=False)
+                       nullable=True)
     amenity_ids = []
