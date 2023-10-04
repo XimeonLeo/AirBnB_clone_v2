@@ -87,7 +87,7 @@ class Place(BaseModel, Base):
                 this place
             """
             from models import Amenity
-            amenities[]
+            amenities = []
             for amenity in storage.all(Amenity).values():
                 if amenity._id == self.amenity_ids:
                     amenities.append(amenity)
