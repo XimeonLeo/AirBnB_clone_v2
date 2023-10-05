@@ -10,12 +10,12 @@ import os
 def do_pack():
     """ A method that creates the archive """
     time = datetime.utcnow()
-    file_name = "web_static_{}{}{}{}{}{}".format(time.year,
-                                                 time.month,
-                                                 time.day,
-                                                 time.hour,
-                                                 time.minute,
-                                                 time.second)
+    file_name = "versions/web_static_{}{}{}{}{}{}".format(time.year,
+                                                 	  time.month,
+                                                	  time.day,
+                                                 	  time.hour,
+                                         	          time.minute,
+                                                 	  time.second)
 
     if not os.path.isdir("versions"):
         if local("mkdir -p versions").failed is True:
