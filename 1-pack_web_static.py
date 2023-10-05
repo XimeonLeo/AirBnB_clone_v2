@@ -21,6 +21,6 @@ def do_pack():
         if local("mkdir -p versions").failed is True:
             return None
 
-    if local(f"tar -czvf {file_name} web_static").failed is True:
+    if local("tar -czvf {} web_static".format(file_name)).failed is True:
         return None
-    return file
+    return file_name
