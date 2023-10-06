@@ -55,8 +55,8 @@ def do_deploy(archive_path):
         # removing archive from the server('/tmp/')
         run("rm -rf /tmp/{}".format(zip_file))
 
-	# moving content of webstatic to parent directory
-	run("mv {0}{1}/web_static/* {0}{1}".format(location, _file))
+        # moving content of webstatic to parent directory
+        run("mv {0}{1}/web_static/* {0}{1}".format(location, _file))
 
         # recreating smylink
         run("rm -rf /data/web_static/current")
