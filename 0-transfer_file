@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#A bash script that transfers file from a client to a server
+
+if [ $# -lt 3 ]; then
+  echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY";
+  exit;
+fi;
+
+if [ $# -ge 4 ]; then
+  path="$1"
+  server_ip="$2"
+  username="$3"
+  priv_key="$4"
+
+  scp -o StrictHostKeyChecking=no -i "$priv_key" "$path" "$username"@"$server_ip":~/
+ 
+else
+  scp -o StrictHostKeyChecking=no "$path" "$username"@"$server_ip":~/
+
+fi;
