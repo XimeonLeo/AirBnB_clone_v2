@@ -39,25 +39,28 @@ def do_deploy(archive_path):
         if not os.path.exists(archive_path):
             return False
         zip_file = os.path.basename(archive_path)
-        file = zip_file.split(".")[0]
+        _file = zip_file.split(".")[0]
 
         # putting the archive file in /tmp/ directory
         put(archive_path, "/tmp/")
 
         location = "/data/web_static/releases/"
         # replacing old file
-        run("rm -rf {}{}".format(location, file))
-        run("mkdir -p {}{}".format(location, file))
+        run("rm -rf {}{}".format(location, _file))
+        run("mkdir -p {}{}".format(location, _file))
 
         # Uncompresaing archive file
-        run("tar -xzf /tmp/{} -C {}{}".format(zip_file, location, file))
+        run("tar -xzf /tmp/{} -C {}{}".format(zip_file, location, _file))
 
         # removing archive from the server('/tmp/')
         run("rm -rf /tmp/{}".format(zip_file))
 
+	# moving content of webstatic to parent directory
+	run("mv {0}{1}/web_static/* {0}{1}".format(location, _file))
+
         # recreating smylink
         run("rm -rf /data/web_static/current")
-        run("ln -s {}{} /data/web_static/current".format(location, file))
+        run("ln -s {}{} /data/web_static/current".format(location, _file))
         print('New version deployed!')
         return True
 
