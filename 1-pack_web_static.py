@@ -16,12 +16,13 @@ def do_pack():
                               time.hour,
                               time.minute,
                               time.second)
-    path = f"versions/web_static_{dt}"
+    path = "versions/web_static_{}".format(dt)
+    print("Packing web_static to {}".format(path))
 
     if not os.path.isdir("versions"):
         if local("mkdir -p versions").failed is True:
             return None
 
-    if local("tar -czvf {} web_static".format(file_name)).failed is True:
+    if local("tar -czvf {} web_static".format(path)).failed is True:
         return None
     return path
