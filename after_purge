@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# This script reinstall all the required part for my webserver
+# provided you have the correct files
+
+############################################################
+# You can run just this one line instead, it does it all   #
+#                                                          #
+# sudo ./0-setup_web_static.sh                             #
+#                                                          #
+############################################################
+
+# using my web servera in sudo mode (as root)
+sudo su
+
+# installing the nginx server newly with some configurations
+./1-install_nginx_web_server
+
+# enabling the redirect me
+./3-redirection
+
+# handling the error page
+./4-not_found_page_404
+
+# hadding headers to tell with servee took in the requeat
+./0-custom_http_response_header
+
+# go into your load balance and run the "1-install_load_balancer" file to activate the roundrobin algorithm
