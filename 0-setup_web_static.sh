@@ -31,20 +31,26 @@ sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 # Giving ownership to /data/ directory to ubuntu user
 sudo chown -Rh ubuntu:ubuntu /data/
 
-# Configuring Nginx
+# Nginx configuration file
 config_file="/etc/nginx/sites-available/default"
 
+# adding a default welcome message
 echo 'Hello World' | sudo tee /var/www/html/index.html > /dev/null
-replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.google.com permanent;"
-sudo sed -i "s/server_name _;/$replacement/" $config_file
 
+# handling redirections
+replacement="48i\\\tif (\$request_filename ~ redirect_me){\n\t\trewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\n\t}"
+sudo sed -i "$replacement" $config_file
+
+# handling error page
 echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html
-newlines="\\\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}"
-sudo sed -i "27i $newlines" $config_file
+line="\\\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}"
+sudo sed -i "27i $line" $config_file
 
-sudo sed -i "50i\\\t\tadd_header X-Served-By $HOSTNAME;" $config_file
+# adsing a custom header
+sudo sed -i "32i\\\tadd_header X-Served-By $HOSTNAME;" $config_file
 
-sudo sed -i '/^server {/a \ \n\tlocation \/hbnb_static {alias /data/web_static/current/;index index.html;}' $config_file
+# creating an alias "hbnb_syatic" to a root
+sudo sed -i '38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' $config_file
 
 # Restarting Nginx
 sudo service nginx restart
