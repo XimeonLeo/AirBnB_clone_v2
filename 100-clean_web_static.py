@@ -3,7 +3,7 @@
         web_static
 """
 from datetime import datetime
-from fabric.api import local, task, run, put, env, runs_once
+from fabric.api import local, task, run, put, env, runs_once, lcd, cd
 import os
 
 
@@ -110,7 +110,7 @@ def do_clean(number=0):
 
     path = "/data/web_static/releases"
     with cd(path):
-        arvhieves = run("ls -tr").split()
-        archieves = [a for a in arvhieves if "web_static_" in a]
-        [arvhieves.pop() for i in range(number)]
-        [run("rm -rf ./format(a)") for a in arvhieves]
+        archives = run("ls -tr").split()
+        archives = [a for a in archives if "web_static_" in a]
+        [archives.pop() for i in range(number)]
+        [run("rm -rf ./{}".format(a)) for a in archives]
