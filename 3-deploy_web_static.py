@@ -3,14 +3,14 @@
         web_static
 """
 from datetime import datetime
-from fabric.api import local, task, run, put, env
+from fabric.api import local, task, run, put, env, runs_once
 import os
 
 
 env.hosts = ['54.162.80.16', '54.236.45.116']
 
 
-@task
+@runs_once
 def do_pack():
     """ A method that creates the archive
         Usage: fab -f 1-pack_web_static.py do_pack
