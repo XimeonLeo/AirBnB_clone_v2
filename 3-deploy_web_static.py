@@ -35,8 +35,8 @@ def do_pack():
 @task
 def do_deploy(archive_path):
     """ Destribute an archive to my web servers
-        Usage: fab -f 2-do_deploy_web_static.py\/
-        do_deploy:archive_path=versions/web_static_20170315003959.tgz\/
+        Usage: fab -f 2-do_deploy_web_static.py\
+        do_deploy:archive_path=versions/web_static_20170315003959.tgz\
         -i my_ssh_private_key -u ubuntu
     """
     try:
@@ -80,8 +80,8 @@ def do_deploy(archive_path):
 
 @task
 def deploy():
-    """ pack and deploy to servwe 
-        Ussage: fab -f 3-deploy_web_static.py deploy\/
+    """ pack and deploy to servwe
+        Ussage: fab -f 3-deploy_web_static.py deploy\
                 -i my_ssh_private_key -u ubuntu
     """
     archive_path = do_pack()
