@@ -29,7 +29,7 @@ def do_deploy(archive_path):
         run("rm -rf {}{}/".format(location, _file))
 
         # making necessary directory
-        run("mkdir -p {}{}".format(location, _file))
+        run("mkdir -p {}{}/".format(location, _file))
 
         # Uncompresaing archive file
         run("tar -xzf /tmp/{} -C {}{}".format(zip_file, location, _file))
@@ -45,7 +45,7 @@ def do_deploy(archive_path):
 
         # recreating smylink
         run("rm -rf /data/web_static/current")
-        run("ln -s {}{} /data/web_static/current".format(location, _file))
+        run("ln -s {}{}/ /data/web_static/current".format(location, _file))
         print('New version deployed!')
         return True
 
