@@ -44,7 +44,6 @@ def do_deploy(archive_path):
         run("rm -rf {}{}/web_static".format(dpath, fn_no_ext))
         run("rm -rf /data/web_static/current")
         run("ln -s {}{}/ /data/web_static/current".format(dpath, fn_no_ext))
-        location = "/data/web_static/releases/"
         print("New version deployed!")
         return True
     except Exception:
