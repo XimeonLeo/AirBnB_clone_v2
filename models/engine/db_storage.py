@@ -36,7 +36,7 @@ class DBStorage:
     def all(self, cls=None):
         """ Query a database session (seld.__session) """
         if cls:
-            result = self.__session.query(eval(cls)).all()
+            result = self.__session.query(cls).all()
         else:
             result = self.__session.query(State).all()
             result.extend(self.__session.query(City).all())
